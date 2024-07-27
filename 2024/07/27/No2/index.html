@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>如何用虚拟机搭建Linux环境 | Moon</title><meta name="author" content="Moonbirds"><meta name="copyright" content="Moonbirds"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="如何用虚拟机搭建Linux环境由于最近开始学习Linux，发现市面上很多用虚拟机配置Linux的教程都很久远了，配置的很多东西也都不适用，于是决定写一篇如何在windows11上利用虚拟机配置Linux的教程供参考学习。（本文主要利用VMware和CentOS来配置） 下载VMware首先先在VMware官网找到Resources,在Tool &amp; Training中找到Product Do">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何用虚拟机搭建Linux环境">
+<meta property="og:url" content="https://birdsmoon.github.io/2024/07/27/No2/index.html">
+<meta property="og:site_name" content="Moon">
+<meta property="og:description" content="如何用虚拟机搭建Linux环境由于最近开始学习Linux，发现市面上很多用虚拟机配置Linux的教程都很久远了，配置的很多东西也都不适用，于是决定写一篇如何在windows11上利用虚拟机配置Linux的教程供参考学习。（本文主要利用VMware和CentOS来配置） 下载VMware首先先在VMware官网找到Resources,在Tool &amp; Training中找到Product Do">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://birdsmoon.github.io/img/touxiang.jpg">
+<meta property="article:published_time" content="2024-07-27T11:43:00.000Z">
+<meta property="article:modified_time" content="2024-07-27T13:28:25.616Z">
+<meta property="article:author" content="Moonbirds">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://birdsmoon.github.io/img/touxiang.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://birdsmoon.github.io/2024/07/27/No2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '如何用虚拟机搭建Linux环境',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-27 21:28:25'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/touxiang.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/bizhi.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Moon"><img class="site-icon" src="/img/favicon.ico"/><span class="site-name">Moon</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">如何用虚拟机搭建Linux环境</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-07-27T11:43:00.000Z" title="Created 2024-07-27 19:43:00">2024-07-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-07-27T13:28:25.616Z" title="Updated 2024-07-27 21:28:25">2024-07-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="如何用虚拟机搭建Linux环境"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="如何用虚拟机搭建Linux环境"><a href="#如何用虚拟机搭建Linux环境" class="headerlink" title="如何用虚拟机搭建Linux环境"></a>如何用虚拟机搭建Linux环境</h1><p>由于最近开始学习Linux，发现市面上很多用虚拟机配置Linux的教程都很久远了，配置的很多东西也都不适用，于是决定写一篇如何在windows11上利用虚拟机配置Linux的教程供参考学习。（本文主要利用VMware和CentOS来配置）</p>
+<h2 id="下载VMware"><a href="#下载VMware" class="headerlink" title="下载VMware"></a>下载VMware</h2><p>首先先在<a target="_blank" rel="noopener" href="https://www.vmware.com/products">VMware官网</a>找到<code>Resources</code>,在<code>Tool &amp; Training</code>中找到<code>Product Downloads</code>选项</p>
+<p><img src="/2024/07/27/No2/1.png" alt="image-20240727200115096"></p>
+<p>进入到这个页面后点击<code>Register</code>进行注册，邮箱验证后</p>
+<p><img src="/2024/07/27/No2/2.png" alt="image-20240727201015928"></p>
+<p>填写个人信息</p>
+<p><img src="/2024/07/27/No2/3.png" alt="image-20240727201156253"></p>
+<p>密码要求较多，跟着填写即可</p>
+<p>注册后，回到页面登录，按如图步骤点击</p>
+<p><img src="/2024/07/27/No2/4.png" alt="image-20240727201527360"></p>
+<p><img src="/2024/07/27/No2/5.png" alt="image-20240727201619738"></p>
+<p><img src="/2024/07/27/No2/6.png" alt="image-20240727201713534"></p>
+<p>下滑找到</p>
+<p><img src="/2024/07/27/No2/7.png" alt="image-20240727201809840"></p>
+<p><img src="/2024/07/27/No2/8.png" alt="image-20240727202718089"></p>
+<p>选择你需要的版本</p>
+<p>如果你下载的是VMware15的话可能不适配Windows11系统，配置CentOS过程会出现蓝屏的情况，所以还是推荐下载最新版本VMware17</p>
+<h2 id="解锁VMware"><a href="#解锁VMware" class="headerlink" title="解锁VMware"></a>解锁VMware</h2><p>一路安装到最后，需要我们输入密钥，这个密钥我们没有必要去购买，一个密钥可以用于多次解锁，下面是一些VMware workstation 17 pro 的密钥</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">4A4RR-813DK-M81A9-4U35H-06KND</span><br><span class="line"></span><br><span class="line">NZ4RR-FTK5H-H81C1-Q30QH-1V2LA</span><br><span class="line"></span><br><span class="line">JU090-6039P-08409-8J0QH-2YR7F</span><br><span class="line"></span><br><span class="line">4Y09U-AJK97-089Z0-A3054-83KLA</span><br><span class="line"></span><br><span class="line">4C21U-2KK9Q-M8130-4V2QH-CF810</span><br><span class="line"></span><br><span class="line">MC60H-DWHD5-H80U9-6V85M-8280D</span><br></pre></td></tr></table></figure>
+
+<p>上面随便一个都可以用</p>
+<h2 id="下载CentOS"><a href="#下载CentOS" class="headerlink" title="下载CentOS"></a>下载CentOS</h2><p>这里提供的是<strong>CentOS 8</strong>的配置过程，根据网上找的资料来看，现在主流应该是CentOS 8（22年的资料），又因为CentOS的官网现在只提供<code>CentOS stream</code>的下载方式，所以这里给出阿里云的<code>CentOS 8</code>下载连接<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/centos/">centos安装包下载_开源镜像站-阿里云 (aliyun.com)</a>下滑找到<code>8.5.2111</code>这个版本后进入</p>
+<p><img src="/2024/07/27/No2/9.png" alt="image-20240727204648560"></p>
+<p><img src="/2024/07/27/No2/10.png" alt="image-20240727204715984"></p>
+<p><img src="/2024/07/27/No2/11.png" alt="image-20240727204749856"></p>
+<h2 id="在VMware上配置CentOS"><a href="#在VMware上配置CentOS" class="headerlink" title="在VMware上配置CentOS"></a>在VMware上配置CentOS</h2><p>一切都准备就绪后打开VMware</p>
+<p><strong>创建新的虚拟机</strong></p>
+<p><img src="/2024/07/27/No2/12.png" alt="image-20240727205016190"></p>
+<p>然后选择稍后安装操作系统—&gt;下一步</p>
+<p><img src="/2024/07/27/No2/13.png" alt="image-20240727205210062"></p>
+<p>名称自取，位置建议选空间比较大的盘</p>
+<p><img src="/2024/07/27/No2/14.png" alt="image-20240727205523284"></p>
+<p>这里一般学习的话20G就够用了，后面也可以更改</p>
+<p><img src="/2024/07/27/No2/15.png" alt="image-20240727205916520"></p>
+<p>这里需要配置内存，处理器，CD，网络适配器这几个选项</p>
+<h3 id="内存配置"><a href="#内存配置" class="headerlink" title="内存配置"></a>内存配置</h3><p>一般来说2GB就够用了，如果有额外需求也可以适当增加，但最好不要超过最大建议内存</p>
+<h3 id="处理器"><a href="#处理器" class="headerlink" title="处理器"></a>处理器</h3><p>这里我们可以打开主机的任务管理器，找到性能</p>
+<p><img src="/2024/07/27/No2/16.png" alt="image-20240727210325262"></p>
+<p>根据我们自身设备配置，但也不要太大，一般2x2就够用了</p>
+<h3 id="CD项配置"><a href="#CD项配置" class="headerlink" title="CD项配置"></a>CD项配置</h3><p>选项改为<strong>使用ISO映像文件</strong></p>
+<p>iso选择我们刚刚下载的CentOS目录即可</p>
+<h3 id="网络适配器"><a href="#网络适配器" class="headerlink" title="网络适配器"></a>网络适配器</h3><p>有三种模式</p>
+<p>1.桥接模式：桥接模式使得虚拟机和物理机共享同一个网络，虚拟机的MAC地址和物理机的MAC地址是相同的，因此虚拟机可以像物理机一样直接与网络上的其他设备进行通信。</p>
+<p>2:NAT模式：而NAT模式则会为虚拟机分配一个虚拟的IP地址，并将这个IP地址与物理机的IP地址集成在同一个网络上，虚拟机的IP地址与物理机的IP地址是不同的，虚拟机只能通过NAT网关与外部网络进行通信。</p>
+<p>3.主机模式：使得虚拟机成为一个独立的系统，只与主机相互通讯。</p>
+<p>所以这里默认是NAT模式</p>
+<p>配置完成后关闭进入下一步</p>
+<h2 id="安装Linux-CentOS-Linux-8"><a href="#安装Linux-CentOS-Linux-8" class="headerlink" title="安装Linux CentOS Linux 8"></a>安装Linux CentOS Linux 8</h2><p>我们弄好以后打开虚拟机会出现下列页面</p>
+<p>这时候需要我们安装Linux CentOS Linux 8</p>
+<p><img src="/2024/07/27/No2/17.png" alt="image-20240727211509775"></p>
+<p>这里说一下基本操作 </p>
+<p>鼠标单击虚拟机即可进入到虚拟机页面或者<code>Ctrl+G</code></p>
+<p>而从虚拟页面退出为<code>Ctrl+Alt</code></p>
+<p>如图所示选择好后回车，会出现配置项</p>
+<p><img src="/2024/07/27/No2/18.png" alt="image-20240727211828832"></p>
+<p>选择中文</p>
+<p>又进入一个配置</p>
+<p><img src="/2024/07/27/No2/19.png" alt="image-20240727211920462"></p>
+<p>出现叹号的需要重新配置一下</p>
+<h3 id="网络与主机名"><a href="#网络与主机名" class="headerlink" title="网络与主机名"></a>网络与主机名</h3><p>进入后</p>
+<p><img src="/2024/07/27/No2/20.png" alt="image-20240727212058655"></p>
+<p>打开后点完成即可</p>
+<h3 id="安装目的地"><a href="#安装目的地" class="headerlink" title="安装目的地"></a>安装目的地</h3><p>这里点进去后直接点完成就行，会自动分区</p>
+<h3 id="安装源"><a href="#安装源" class="headerlink" title="安装源"></a>安装源</h3><p>可能会出现设置基础仓库时出错</p>
+<p><img src="/2024/07/27/No2/21.png" alt="image-20240727212257866"></p>
+<p>这里的协议改为<code>http://</code></p>
+<p>路径改为<code>mirrors.aliyun.com/centos/8/BaseOS/x86_64/os/</code></p>
+<p>点击完成</p>
+<h3 id="根密码"><a href="#根密码" class="headerlink" title="根密码"></a>根密码</h3><p>输入你管理用户的密码</p>
+<p>以上都完成后就可以点击开始安装了，时间较长，安装好后就配置完成了</p>
+<p>以上是配置虚拟机Linux的全部教程</p>
+<p>如果有问题欢迎在下方留言</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://birdsmoon.github.io">Moonbirds</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://birdsmoon.github.io/2024/07/27/No2/">https://birdsmoon.github.io/2024/07/27/No2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="/img/touxiang.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/07/22/No1/" title="如何利用Hexo搭建一个自己的博客"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">如何利用Hexo搭建一个自己的博客</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Moonbirds</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sett1ngsuns"><i class="fab fa-github"></i><span>My github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">新建博客,欢迎收藏 评论时请使用有效邮箱</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%94%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%90%AD%E5%BB%BALinux%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">如何用虚拟机搭建Linux环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDVMware"><span class="toc-number">1.1.</span> <span class="toc-text">下载VMware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%94%81VMware"><span class="toc-number">1.2.</span> <span class="toc-text">解锁VMware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDCentOS"><span class="toc-number">1.3.</span> <span class="toc-text">下载CentOS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8VMware%E4%B8%8A%E9%85%8D%E7%BD%AECentOS"><span class="toc-number">1.4.</span> <span class="toc-text">在VMware上配置CentOS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.1.</span> <span class="toc-text">内存配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">1.4.2.</span> <span class="toc-text">处理器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CD%E9%A1%B9%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.3.</span> <span class="toc-text">CD项配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E9%80%82%E9%85%8D%E5%99%A8"><span class="toc-number">1.4.4.</span> <span class="toc-text">网络适配器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Linux-CentOS-Linux-8"><span class="toc-number">1.5.</span> <span class="toc-text">安装Linux CentOS Linux 8</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E4%B8%8E%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="toc-number">1.5.1.</span> <span class="toc-text">网络与主机名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%9B%AE%E7%9A%84%E5%9C%B0"><span class="toc-number">1.5.2.</span> <span class="toc-text">安装目的地</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%BA%90"><span class="toc-number">1.5.3.</span> <span class="toc-text">安装源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E5%AF%86%E7%A0%81"><span class="toc-number">1.5.4.</span> <span class="toc-text">根密码</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/2024/07/27/No2/" title="如何用虚拟机搭建Linux环境">如何用虚拟机搭建Linux环境</a><time datetime="2024-07-27T11:43:00.000Z" title="Created 2024-07-27 19:43:00">2024-07-27</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/07/22/No1/" title="如何利用Hexo搭建一个自己的博客">如何利用Hexo搭建一个自己的博客</a><time datetime="2024-07-22T07:23:16.000Z" title="Created 2024-07-22 15:23:16">2024-07-22</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/bizhi.png')"><div id="footer-wrap"><div class="copyright">&copy;2024 By Moonbirds</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">夜深人静就来看看吧！</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://moonsbird.netlify.app/.netlify/functions/twikoo',
+      region: 'us-west-2',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://moonsbird.netlify.app/.netlify/functions/twikoo',
+      region: 'us-west-2',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else getScript('https://cdn.jsdelivr.net/npm/twikoo@1.6.31/dist/twikoo.all.min.js').then(init)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
